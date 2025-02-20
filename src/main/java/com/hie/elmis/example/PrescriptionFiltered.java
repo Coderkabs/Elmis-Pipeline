@@ -23,7 +23,7 @@ public class PrescriptionFiltered {
         System.out.println("Processing.......");
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         String topic = "prescriptions";
-        String groupId = "hie-manager-stream-prescription-group-new1234";
+        String groupId = "hie-manager-stream-prescription-group-new123478";
         FlinkKafkaConsumer<String> kafkaConsumer = StreamingConfiguration.createKafkaConsumer(topic, groupId);
         DataStream<String> kafkaStream = env.addSource(kafkaConsumer);
         DataStream<PrescriptionAckRecord> prescriptionAckStream = kafkaStream.map(new MapFunction<String, PrescriptionAckRecord>() {

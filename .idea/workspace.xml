@@ -5,26 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5058bd1d-e414-4103-a616-dd120f051817" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BusinessLogic/DispensationAckProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BusinessLogic/DispensationNewProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BusinessLogic/PrescriptionAckProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Configuration/DbConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Configuration/KafkaProducerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Configuration/StreamingConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utils/PrescriptionAckRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/DispensationAckMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/DispensationNewMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionAckMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionExtractsInitial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionFiltered.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionNew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionFiltered.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionFiltered.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Coderkabs&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Coderkabs/Elmis-Pipeline.git&quot;,
+    &quot;accountId&quot;: &quot;178094ee-d87e-4bad-aa04-dd524a535913&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -52,6 +46,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Extracts.executor": "Run",
     "Application.PrescriptionFiltered.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -61,7 +56,10 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="elmis-run" type="Application" factoryName="Application">
+    <configuration name="Extracts" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.hie.elmis.example.PrescriptionExtractsInitial" />
       <module name="zm.gov.moh.hie.elmis" />
       <option name="PROGRAM_PARAMETERS" value="--add-opens java.base/java.util=ALL-UNNAMED" />
       <method v="2">
