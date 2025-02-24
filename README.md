@@ -30,7 +30,7 @@ Ensure you have the following installed:
 - Java 11 or higher
 - Maven 3.6+
 - PostgreSQL database
-- Kafka cluster with configured topics   and consumer groupIds..
+- Kafka cluster with configured topics   and consumer groupIds.
 
 Configuration
 

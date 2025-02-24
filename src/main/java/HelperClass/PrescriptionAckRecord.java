@@ -1,4 +1,4 @@
-package Utils;
+package HelperClass;
 public class PrescriptionAckRecord {
     public String hmisCode;
     public String payload;

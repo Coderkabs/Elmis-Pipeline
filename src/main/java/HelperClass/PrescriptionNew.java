@@ -1,4 +1,4 @@
-package Utils;
+package HelperClass;
 
 import java.sql.Timestamp;
 

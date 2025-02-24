@@ -1,7 +1,7 @@
 package zm.gov.moh.hie.elmis;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import Utils.PrescriptionAckRecord;
+import HelperClass.PrescriptionAckRecord;
 import Configuration.KafkaProducerService; 
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;

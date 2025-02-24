@@ -15,7 +15,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import Configuration.StreamingConfiguration;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
-import Utils.PrescriptionAckRecord;
+import HelperClass.PrescriptionAckRecord;
 import Configuration.StreamingConfiguration;
 
 public class PrescriptionFiltered {

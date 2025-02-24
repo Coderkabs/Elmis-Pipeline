@@ -1,13 +1,19 @@
-package Configuration;
+
 import HelperClass.PrescriptionAckRecord;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
-import org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema;
+
+import javax.annotation.Nullable;
 import java.util.Properties;
-public class KafkaProducerService {
-    public static FlinkKafkaProducer<PrescriptionAckRecord> createKafkaProducer() {
-        Properties producerProperties = new Properties();
+
+public class KafkaPrescriptionProducer {
+
+    private final Properties producerProperties;
+
+    public KafkaPrescriptionProducer() {
+        producerProperties = new Properties();
         producerProperties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "154.120.216.119:9093,102.23.123.251:9093,102.23.120.153:9093");
         producerProperties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
         producerProperties.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
@@ -19,12 +25,14 @@ public class KafkaProducerService {
         producerProperties.setProperty("sasl.jaas.config", "org.apache.kafka.common.security.scram.ScramLoginModule required "
                 + "username=\"admin\" "
                 + "password=\"075F80FED7C6\";");
-        producerProperties.setProperty("metadata.fetch.timeout.ms", "120000");
+    }
+
+    public FlinkKafkaProducer<PrescriptionAckRecord> createProducer() {
         return new FlinkKafkaProducer<>(
                 "default-topic",
                 new KafkaSerializationSchema<PrescriptionAckRecord>() {
                     @Override
-                    public ProducerRecord<byte[], byte[]> serialize(PrescriptionAckRecord record, Long timestamp) {
+                    public ProducerRecord<byte[], byte[]> serialize(PrescriptionAckRecord record, @Nullable Long timestamp) {
                         String topic = "h-" + record.hmisCode + "_m-PR";
                         return new ProducerRecord<>(topic, record.payload.getBytes());
                     }
