@@ -1,5 +1,4 @@
 package Configuration;
-
 import Utils.PrescriptionAckRecord;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
 import org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema;
