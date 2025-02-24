@@ -1,4 +1,5 @@
 package BusinessLogic;
+
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.connector.jdbc.*;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -10,11 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 import Configuration.DbConfiguration;
 import Configuration.StreamingConfiguration;
-
-
 
 public class DispensationNewProcess {
     public static void processDispensationPayloads(StreamExecutionEnvironment env) {
@@ -29,7 +27,6 @@ public class DispensationNewProcess {
                     @Override
                     public DispensationRecord map(String json) throws Exception {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
                         JsonNode payload;
                         try {
                             payload = objectMapper.readTree(json);
@@ -37,21 +34,21 @@ public class DispensationNewProcess {
                             System.err.println("Failed to parse JSON: " + e.getMessage());
                             return null;
                         }
-
                         JsonNode msh = payload.path("msh");
                         JsonNode regimen = payload.path("regimen");
-
                         String timestampStr = msh.path("timestamp").asText();
-                        LocalDateTime localDateTime = LocalDateTime.parse(timestampStr, formatter);
-                        Timestamp timestamp = Timestamp.valueOf(localDateTime);
-
-                        String prescriptionUuidStr = payload.path("prescriptionUuid").asText();
-                        UUID prescriptionUuid;
-                        try {
-                            prescriptionUuid = UUID.fromString(prescriptionUuidStr);
-                        } catch (IllegalArgumentException e) {
-                            System.err.println("Loading data apa " + prescriptionUuidStr);
-                            prescriptionUuid = UUID.fromString("00000000-0000-0000-0000-000000000000");
+                        Timestamp timestamp;
+                        if (timestampStr == null || timestampStr.trim().isEmpty()) {
+                            System.err.println("Missing or empty timestamp. Using current timestamp.");
+                            timestamp = Timestamp.valueOf(LocalDateTime.now());
+                        } else {
+                            try {
+                                LocalDateTime localDateTime = LocalDateTime.parse(timestampStr, formatter);
+                                timestamp = Timestamp.valueOf(localDateTime);
+                            } catch (Exception e) {
+                                System.err.println("Invalid timestamp format: " + timestampStr + ". Using current timestamp.");
+                                timestamp = Timestamp.valueOf(LocalDateTime.now());
+                            }
                         }
                         return new DispensationRecord(
                                 timestamp,
@@ -61,25 +58,14 @@ public class DispensationNewProcess {
                                 msh.path("hmisCode").asText(),
                                 regimen.path("regimenCode").asText(),
                                 regimen.path("duration").asInt(),
-                                payload.path("dispensedDrugs").size(),
-                                prescriptionUuid
+                                payload.path("dispensedDrugs").size()
                         );
                     }
                 })
                 .filter(record -> record != null);
-
         dispensationStream.addSink(JdbcSink.sink(
-                "INSERT INTO dispensation_new (timestamp, sending_application, receiving_application, message_id, hmis_code, regimen_code, regimen_duration, dispensation_count, prescription_uuid) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) " +
-                        "ON CONFLICT (message_id) DO UPDATE SET " +
-                        "timestamp = EXCLUDED.timestamp, " +
-                        "sending_application = EXCLUDED.sending_application, " +
-                        "receiving_application = EXCLUDED.receiving_application, " +
-                        "hmis_code = EXCLUDED.hmis_code, " +
-                        "regimen_code = EXCLUDED.regimen_code, " +
-                        "regimen_duration = EXCLUDED.regimen_duration, " +
-                        "dispensation_count = EXCLUDED.dispensation_count, " +
-                        "prescription_uuid = EXCLUDED.prescription_uuid",
+                "INSERT INTO dispensation (timestamp, sending_application, receiving_application, message_id, hmis_code, regimen_code, regimen_duration, dispensation_count) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ",
                 (PreparedStatement statement, DispensationRecord record) -> {
                     statement.setTimestamp(1, record.timestamp);
                     statement.setString(2, record.sendingApplication);
@@ -89,14 +75,13 @@ public class DispensationNewProcess {
                     statement.setString(6, record.regimenCode);
                     statement.setInt(7, record.regimenDuration);
                     statement.setInt(8, record.dispensationsCount);
-                    statement.setObject(9, record.prescriptionUuid);
                 },
                 JdbcExecutionOptions.builder()
                         .withBatchSize(1000)
                         .withBatchIntervalMs(200)
                         .withMaxRetries(5)
                         .build(),
-                 DbConfiguration.getConnectionOptions()
+                DbConfiguration.getConnectionOptions()
         ));
     }
 
@@ -109,11 +94,10 @@ public class DispensationNewProcess {
         public String regimenCode;
         public int regimenDuration;
         public int dispensationsCount;
-        public UUID prescriptionUuid;
 
         public DispensationRecord(Timestamp timestamp, String sendingApplication, String receivingApplication,
                                   String messageId, String hmisCode, String regimenCode, int regimenDuration,
-                                  int dispensationsCount, UUID prescriptionUuid) {
+                                  int dispensationsCount) {
             this.timestamp = timestamp;
             this.sendingApplication = sendingApplication;
             this.receivingApplication = receivingApplication;
@@ -122,7 +106,6 @@ public class DispensationNewProcess {
             this.regimenCode = regimenCode;
             this.regimenDuration = regimenDuration;
             this.dispensationsCount = dispensationsCount;
-            this.prescriptionUuid = prescriptionUuid;
         }
     }
 }
