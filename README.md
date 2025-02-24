@@ -9,12 +9,12 @@ Elmis pipeline is a data streaming  application  that utilizes  Apache flink and
 ```
 zm.gov.moh.hie.elmis/
 ├── src/main/java
-│   ├── BusinessLogic
-│   ├── zm.gov.moh.hie.elmis
-    |-- Configuration
-    |-- Utils 
-├── pom.xml
-└── README.md
+│   ├── BusinessLogic  #implements extended operations for other main methods
+│   ├── zm.gov.moh.hie.elmis # implements main  methods for each job
+    |-- Configuration  #  handles essencial configuration e.g  database, server etc.. 
+    |-- HelperClass   # Handles the  implementation of DTOs and  other reusable  methods.
+├── pom.xml   # initiates  the  project dependences.
+└── README.md  # sample  project documentation.
 ```
 ## Technologies Used
 - **Apache Flink**: For real-time stream processing
@@ -30,7 +30,7 @@ Ensure you have the following installed:
 - Java 11 or higher
 - Maven 3.6+
 - PostgreSQL database
-- Kafka cluster with configured topics
+- Kafka cluster with configured topics   and consumer groupIds..
 
 Configuration
 
@@ -40,8 +40,8 @@ Modify the following properties in `getKafkaProperties()` to match your Kafka se
 props.setProperty("bootstrap.servers", "");
 props.setProperty("group.id", "");
 props.setProperty("sasl.jaas.config", "");
-```
 
+```
 #### Database Connection Settings (in `Configuration/DbConfiguration`)
 Modify the JDBC connection settings:
 ```java
