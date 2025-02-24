@@ -7,7 +7,6 @@
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
-////import org.mockito.Mockito;
 //
 //
 //import static org.junit.Assert.assertEquals;
@@ -21,11 +20,10 @@
 //    void setUp() {
 //        kafkaPrescriptionProducer = new KafkaPrescriptionProducer();
 //    }
-//
 //    @Test
 //    void testSerializationSchema() {
-//        KafkaSerializationSchema<PrescriptionAckRecord> schema = new KafkaPrescriptionProducer.createProducer().getSerializationSchema();
-//        PrescriptionAckRecord record = new PrescriptionAckRecord("1234", "{\"message\": \"test\"}");
+//        KafkaSerializationSchema<PrescriptionAckRecord> schema = new kafkaPrescriptionProducer.createProducer().getSerializationSchema();
+//        PrescriptionAckRecord record = new PrescriptionAckRecord("906785", "{\"message\": \"test\"}");
 //        ProducerRecord<byte[], byte[]> producerRecord = schema.serialize(record, System.currentTimeMillis());
 //
 //        Assertions.assertNotNull(producerRecord);
