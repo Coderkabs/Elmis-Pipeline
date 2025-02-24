@@ -65,7 +65,16 @@ public class DispensationNewProcess {
                 .filter(record -> record != null);
         dispensationStream.addSink(JdbcSink.sink(
                 "INSERT INTO dispensation (timestamp, sending_application, receiving_application, message_id, hmis_code, regimen_code, regimen_duration, dispensation_count) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ",
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?) " +
+                        "ON CONFLICT (message_id) DO UPDATE SET " +
+                        "timestamp = EXCLUDED.timestamp, " +
+                        "sending_application = EXCLUDED.sending_application, " +
+                        "receiving_application = EXCLUDED.receiving_application, " +
+                        "hmis_code = EXCLUDED.hmis_code, " +
+                        "regimen_code = EXCLUDED.regimen_code, " +
+                        "regimen_duration = EXCLUDED.regimen_duration, " +
+                        "dispensation_count = EXCLUDED.dispensation_count",
+
                 (PreparedStatement statement, DispensationRecord record) -> {
                     statement.setTimestamp(1, record.timestamp);
                     statement.setString(2, record.sendingApplication);
@@ -77,14 +86,14 @@ public class DispensationNewProcess {
                     statement.setInt(8, record.dispensationsCount);
                 },
                 JdbcExecutionOptions.builder()
-                        .withBatchSize(1000)
-                        .withBatchIntervalMs(200)
+                        .withBatchSize(500)
+                        .withBatchIntervalMs(100)
                         .withMaxRetries(5)
                         .build(),
                 DbConfiguration.getConnectionOptions()
         ));
-    }
 
+    }
     public static class DispensationRecord {
         public Timestamp timestamp;
         public String sendingApplication;
@@ -94,7 +103,6 @@ public class DispensationNewProcess {
         public String regimenCode;
         public int regimenDuration;
         public int dispensationsCount;
-
         public DispensationRecord(Timestamp timestamp, String sendingApplication, String receivingApplication,
                                   String messageId, String hmisCode, String regimenCode, int regimenDuration,
                                   int dispensationsCount) {
