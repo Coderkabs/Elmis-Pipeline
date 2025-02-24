@@ -10,13 +10,12 @@ Elmis pipeline is a data streaming  application  that utilizes  Apache flink and
 zm.gov.moh.hie.elmis/
 ├── src/main/java
 │   ├── BusinessLogic
-│   ├── com.hie.elmis.example
+│   ├── zm.gov.moh.hie.elmis
     |-- Configuration
     |-- Utils 
 ├── pom.xml
 └── README.md
 ```
-
 ## Technologies Used
 - **Apache Flink**: For real-time stream processing
 - **Apache Kafka**: As a message broker
@@ -78,6 +77,8 @@ java -jar target/CarePro-pipelines-1.0-SNAPSHOT.jar
 ### `pom.xml`
 - Contains project dependencies such as Flink, Kafka, PostgreSQL JDBC, and Jackson.
 
+## zm.gov.moh.hie.elmis
+- Defines  the  main entry-point methods  for each job, the implemented  methods include dispensation,prescription, dispensation Acknowledgement, prescription  Acknowledgement  etc ..
 ## Database Schema
 
 Ensure your PostgreSQL database has the following table
@@ -143,6 +144,9 @@ WITH (
   OIDS=FALSE
 );
 ```
+## Utils
+ - Implements Static  DTOs which  are  inherited on  some business Logic...
+
 ## Troubleshooting
 ### Common Issues
 - **Kafka Connection Issues**: Ensure Kafka brokers and authentication settings are correct.

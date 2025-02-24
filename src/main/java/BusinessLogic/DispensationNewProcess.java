@@ -53,7 +53,6 @@ public class DispensationNewProcess {
                             System.err.println("Loading data apa " + prescriptionUuidStr);
                             prescriptionUuid = UUID.fromString("00000000-0000-0000-0000-000000000000");
                         }
-
                         return new DispensationRecord(
                                 timestamp,
                                 msh.path("sendingApplication").asText(),
