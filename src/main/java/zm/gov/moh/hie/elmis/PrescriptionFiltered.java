@@ -1,4 +1,4 @@
-package com.hie.elmis.example;
+package zm.gov.moh.hie.elmis;
 
 import Configuration.KafkaProducerService;
 import com.fasterxml.jackson.databind.JsonNode;

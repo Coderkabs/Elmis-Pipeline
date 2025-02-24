@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5058bd1d-e414-4103-a616-dd120f051817" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/DispensationAckMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/DispensationNewMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionAckMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionExtractsInitial.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionFiltered.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hie/elmis/example/PrescriptionNew.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,17 +49,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Extracts.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PrescriptionFiltered.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Extracts.executor": "Debug",
+    "Application.PrescriptionFiltered.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Esther/CodeBusket/elmis-pipeline",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Extracts" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />

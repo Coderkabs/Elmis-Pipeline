@@ -1,4 +1,4 @@
-package com.hie.elmis.example;
+package zm.gov.moh.hie.elmis;
 import BusinessLogic.DispensationAckProcess;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
