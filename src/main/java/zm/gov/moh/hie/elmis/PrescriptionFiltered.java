@@ -1,5 +1,4 @@
 package zm.gov.moh.hie.elmis;
-
 import Configuration.KafkaProducerService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import HelperClass.PrescriptionAckRecord;
 import Configuration.StreamingConfiguration;
-
 public class PrescriptionFiltered {
     public static void main(String[] args) throws Exception {
         System.out.println("Processing.......");
@@ -38,7 +36,6 @@ public class PrescriptionFiltered {
         });
         prescriptionAckStream.addSink(KafkaProducerService.createKafkaProducer());
         env.execute("Prescription-Filtered Payload Router Job");
-
 
     }
 }

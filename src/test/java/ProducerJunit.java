@@ -20,7 +20,7 @@ public class ProducerJunit {
 
         ProducerRecord<byte[], byte[]> producerRecord = schema.serialize(record, System.currentTimeMillis());
         Assertions.assertNotNull(producerRecord);
-        Assertions.assertEquals("h-906785_m-PR", producerRecord.topic());
+        Assertions.assertEquals("h-906785678_m-PR", producerRecord.topic());
         Assertions.assertNotNull(producerRecord.value());
     }
 }

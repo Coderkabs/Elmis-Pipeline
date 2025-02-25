@@ -18,12 +18,10 @@ public class DispensationNewProcess {
     public static void processDispensationPayloads(StreamExecutionEnvironment env) {
         String groupId = "hie-manager-stream-dispensation-group-new1234";
         FlinkKafkaConsumer<String> kafkaConsumer = StreamingConfiguration.createKafkaConsumer("dispensations", groupId);
-
         DataStream<DispensationRecord> dispensationStream = env
                 .addSource(kafkaConsumer)
                 .map(new MapFunction<String, DispensationRecord>() {
                     private final ObjectMapper objectMapper = new ObjectMapper();
-
                     @Override
                     public DispensationRecord map(String json) throws Exception {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

@@ -71,7 +71,6 @@ public class PrescriptionNew {
                 DbConfiguration.getConnectionOptions()
         ));
 
-
         env.execute("Prescription Flink Job");
     }
 
