@@ -18,7 +18,7 @@ public class KafkaProducerService {
         producerProperties.setProperty("sasl.mechanism", "SCRAM-SHA-256");
         producerProperties.setProperty("sasl.jaas.config", "org.apache.kafka.common.security.scram.ScramLoginModule required "
                 + "username=\"admin\" "
-                + "password=\"075F80FED7C6\";");
+                    + "password=\"075F80FED7C6\";");
         producerProperties.setProperty("metadata.fetch.timeout.ms", "120000");
         return new FlinkKafkaProducer<>(
                 "default-topic",
