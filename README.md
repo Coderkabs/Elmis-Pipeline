@@ -1,21 +1,20 @@
-
-
 # Elmis Pipeline
-
 ## Overview
-Elmis pipeline is a data streaming  application  that utilizes  Apache flink and kafka  to be stream-line a smooth ETL process.
+Elmis pipeline is a data streaming application that utilizes Apache Flink and Kafka to streamline a smooth ETL process.
+
 ## Project Structure
 
 ```
 zm.gov.moh.hie.elmis/
 ├── src/main/java
-│   ├── BusinessLogic  #implements extended operations for other main methods
-│   ├── zm.gov.moh.hie.elmis # implements main  methods for each job
-    |-- Configuration  #  handles essencial configuration e.g  database, server etc.. 
-    |-- HelperClass   # Handles the  implementation of DTOs and  other reusable  methods.
-├── pom.xml   # initiates  the  project dependences.
-└── README.md  # sample  project documentation.
+│   ├── BusinessLogic  # Implements extended operations for other main methods
+│   ├── zm.gov.moh.hie.elmis # Implements main methods for each job
+│   ├── Configuration  # Handles essential configuration e.g. database, server, etc.
+│   ├── HelperClass   # Handles the implementation of DTOs and other reusable methods.
+├── pom.xml   # Initiates the project dependencies.
+└── README.md  # Sample project documentation.
 ```
+
 ## Technologies Used
 - **Apache Flink**: For real-time stream processing
 - **Apache Kafka**: As a message broker
@@ -30,19 +29,19 @@ Ensure you have the following installed:
 - Java 11 or higher
 - Maven 3.6+
 - PostgreSQL database
-- Kafka cluster with configured topics   and consumer groupIds.
+- Kafka cluster with configured topics and consumer group IDs.
 
-Configuration
+## Configuration
 
-Kafka Connection Settings (in `Configuration/StreamingConfiguration`)
+### Kafka Connection Settings (in `Configuration/StreamingConfiguration`)
 Modify the following properties in `getKafkaProperties()` to match your Kafka setup:
 ```java
 props.setProperty("bootstrap.servers", "");
 props.setProperty("group.id", "");
 props.setProperty("sasl.jaas.config", "");
-
 ```
-#### Database Connection Settings (in `Configuration/DbConfiguration`)
+
+### Database Connection Settings (in `Configuration/DbConfiguration`)
 Modify the JDBC connection settings:
 ```java
 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
@@ -50,7 +49,7 @@ new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
     .withDriverName("org.postgresql.Driver")
     .withUsername("postgres")
     .withPassword("root")
-    .build()
+    .build();
 ```
 
 ## Building and Running
@@ -59,30 +58,36 @@ new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
 ```sh
 mvn clean package
 ```
+
 ### Run the Application
 ```sh
 java -jar target/CarePro-pipelines-1.0-SNAPSHOT.jar
 ```
+
 ## Code Explanation
 
-### `BusinessLogic
-- **Implements the operations of the dispensation-Ack process(logic  to load data to the  new created dispensation table after  extraction  from dispensations-Ack  topic)
-- **Handles similar  operations for  prescription Acknowledgement and dispensation-new ...
-### Configuration/DbConfiguration
--Defines Database setup which  include  database name, username , password etc..
+### `BusinessLogic`
+- Implements the operations of the dispensation-Ack process (logic to load data to the new created dispensation table after extraction from dispensations-Ack topic).
+- Handles similar operations for prescription acknowledgment and dispensation-new.
+
+### `Configuration/DbConfiguration`
+- Defines database setup including database name, username, password, etc.
+
 ### `Configuration/StreamingConfiguration`
 - Defines Kafka consumer properties and creates a Flink Kafka consumer.
+
 ### `Configuration/KafkaProducerService`
-- Defines kafka producer properties  and writes  data to generated dynamic topics.
+- Defines Kafka producer properties and writes data to generated dynamic topics.
+
 ### `pom.xml`
 - Contains project dependencies such as Flink, Kafka, PostgreSQL JDBC, and Jackson.
 
-## zm.gov.moh.hie.elmis
-- Defines  the  main entry-point methods  for each job, the implemented  methods include dispensation,prescription, dispensation Acknowledgement, prescription  Acknowledgement  etc ..
-## Database Schema
+## `zm.gov.moh.hie.elmis`
+- Defines the main entry-point methods for each job. The implemented methods include dispensation, prescription, dispensation acknowledgment, prescription acknowledgment, etc.
 
-Ensure your PostgreSQL database has the following table
-below  are some  of the  database schema utilized in the business logic of the implemented processes
+## Database Schema
+Ensure your PostgreSQL database has the following tables. Below are some of the database schemas utilized in the business logic of the implemented processes:
+
 ```sql
 CREATE TABLE prescription_new (
     timestamp TIMESTAMP,
@@ -95,8 +100,8 @@ CREATE TABLE prescription_new (
     prescriptions_count INT,
     prescription_uuid UUID
 );
-CREATE TABLE public.dispensation_ack
-(
+
+CREATE TABLE public.dispensation_ack (
   id integer NOT NULL DEFAULT nextval('dispensation_ack_id_seq'::regclass),
   "timestamp" timestamp with time zone NOT NULL,
   sending_application character varying(255) NOT NULL,
@@ -106,12 +111,9 @@ CREATE TABLE public.dispensation_ack
   referenced_message_id character varying(255),
   CONSTRAINT dispensation_ack_pkey PRIMARY KEY (id),
   CONSTRAINT dispensation_ack_message_id_key UNIQUE (message_id)
-)
-WITH (
-  OIDS=FALSE
 );
-CREATE TABLE public.dispensation_new
-(
+
+CREATE TABLE public.dispensation_new (
   id integer NOT NULL DEFAULT nextval('dispensation_new_id_seq'::regclass),
   "timestamp" timestamp with time zone NOT NULL,
   sending_application character varying(255) NOT NULL,
@@ -124,12 +126,9 @@ CREATE TABLE public.dispensation_new
   prescription_uuid uuid NOT NULL,
   CONSTRAINT dispensation_new_pkey PRIMARY KEY (id),
   CONSTRAINT dispensation_new_message_id_key UNIQUE (message_id)
-)
-WITH (
-  OIDS=FALSE
 );
-CREATE TABLE public.prescription_ack
-(
+
+CREATE TABLE public.prescription_ack (
   id integer NOT NULL DEFAULT nextval('prescription_ack_id_seq'::regclass),
   "timestamp" timestamp with time zone NOT NULL,
   sending_application character varying(255) NOT NULL,
@@ -139,15 +138,14 @@ CREATE TABLE public.prescription_ack
   referenced_message_id character varying(255),
   CONSTRAINT prescription_ack_pkey PRIMARY KEY (id),
   CONSTRAINT prescription_ack_message_id_key UNIQUE (message_id)
-)
-WITH (
-  OIDS=FALSE
 );
 ```
+
 ## Utils
- - Implements Static  DTOs which  are  inherited on  some business Logic...
+- Implements static DTOs which are inherited in some business logic.
 
 ## Troubleshooting
+
 ### Common Issues
 - **Kafka Connection Issues**: Ensure Kafka brokers and authentication settings are correct.
 - **Database Connection Errors**: Verify that PostgreSQL is running and credentials are valid.
@@ -155,6 +153,6 @@ WITH (
 
 ## Future Enhancements
 - Add monitoring and logging mechanisms.
-
-
+- Implement error handling and retry mechanisms for failed Kafka messages.
+- Optimize Flink job performance for better efficiency.
 
