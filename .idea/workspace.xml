@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5058bd1d-e414-4103-a616-dd120f051817" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +28,12 @@
     &quot;assignee&quot;: &quot;Coderkabs&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Coderkabs/Elmis-Pipeline.git",
-    "accountId": "178094ee-d87e-4bad-aa04-dd524a535913"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Coderkabs/Elmis-Pipeline.git&quot;,
+    &quot;accountId&quot;: &quot;178094ee-d87e-4bad-aa04-dd524a535913&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -63,7 +62,7 @@
     <configuration name="Extracts" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="zm.gov.moh.hie.elmis.DispensationAckMain" />
+      <option name="MAIN_CLASS_NAME" value="zm.gov.moh.hie.elmis.DispensationNewMain" />
       <module name="elmis-pipeline" />
       <option name="PROGRAM_PARAMETERS" value="--add-opens java.base/java.util=ALL-UNNAMED" />
       <method v="2">

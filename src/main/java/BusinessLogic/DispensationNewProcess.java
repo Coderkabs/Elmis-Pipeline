@@ -72,7 +72,6 @@ public class DispensationNewProcess {
                         "regimen_code = EXCLUDED.regimen_code, " +
                         "regimen_duration = EXCLUDED.regimen_duration, " +
                         "dispensation_count = EXCLUDED.dispensation_count",
-
                 (PreparedStatement statement, DispensationRecord record) -> {
                     statement.setTimestamp(1, record.timestamp);
                     statement.setString(2, record.sendingApplication);
